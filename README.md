@@ -2,6 +2,16 @@
 
 A Claude Code skill that generates beautiful HTML slideshow courses for any codebase — glassmorphism reveal.js presentations with dialogue narrative, interactive quizzes, and adaptive teaching.
 
+## Demo
+
+Here's a course generated for the [Claude Code](https://github.com/anthropics/claude-code) codebase:
+
+**Live demo:** https://learn-claude-code-phi.vercel.app
+
+| Course Index | Architecture Diagram | Dialogue Slide |
+|:---:|:---:|:---:|
+| ![Course Index](docs/demo-index.png) | ![Architecture Diagram](docs/demo-diagram.png) | ![Dialogue Slide](docs/demo-dialogue.png) |
+
 ## What it does
 
 Point it at a codebase, and it will:
