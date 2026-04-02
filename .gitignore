@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.learn/
+uv.lock
+.DS_Store

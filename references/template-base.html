@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{CHAPTER_TITLE}}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" id="hljs-theme">
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .reveal { background: var(--lc-bg-gradient); }
+  </style>
+</head>
+<!-- data-theme="dark" for dark mode -->
+<body data-theme="{{THEME}}">
+
+  <!-- Progress bar -->
+  <div class="chapter-progress"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="chapter-badge">Chapter {{CHAPTER_NUM}}</div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ======= SLIDE TYPE: Title ======= -->
+      <section class="slide-title">
+        <div class="chapter-num">Chapter {{CHAPTER_NUM}}</div>
+        <h1>{{CHAPTER_TITLE}}</h1>
+        <div class="subtitle">{{CHAPTER_SUBTITLE}}</div>
+        <div class="objectives">
+          <strong>Learning objectives:</strong>
+          <ul>
+            <li>Objective 1</li>
+            <li>Objective 2</li>
+            <li>Objective 3</li>
+          </ul>
+        </div>
+        <aside class="notes">Speaker notes for presenter view</aside>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Dialogue (NEW — core narrative vehicle) ======= -->
+      <!--
+        Use this slide type to introduce concepts through character conversation.
+        Characters:
+          bubble-newbie  = Learner / newcomer (asks "why?", brings real-world confusion)
+          bubble-senior  = Expert / architect (explains with analogies and insight)
+          bubble-narrator = System narrator (sets the scene, transitions)
+        Each .chat-bubble auto-animates in sequence via CSS.
+      -->
+      <section class="slide-dialogue">
+        <h2>Topic via Dialogue</h2>
+        <div class="dialogue">
+          <div class="chat-bubble bubble-narrator">
+            <div class="bubble-content">
+              <p>Scene: You just typed <code>claude "fix this bug"</code> in the terminal...</p>
+            </div>
+          </div>
+          <div class="chat-bubble bubble-newbie">
+            <div class="avatar">N</div>
+            <div class="bubble-content">
+              <div class="speaker">Newbie</div>
+              <p>So when I hit Enter, what actually happens? Does the AI just... read my code?</p>
+            </div>
+          </div>
+          <div class="chat-bubble bubble-senior">
+            <div class="avatar">S</div>
+            <div class="bubble-content">
+              <div class="speaker">Senior</div>
+              <p>Not quite! Think of it as a conversation loop. <code>query.ts</code> sends your message to the Claude API, gets back a response, and then checks: "Did Claude ask to use any tools?" If yes, it executes the tools and loops back.</p>
+            </div>
+          </div>
+          <div class="chat-bubble bubble-newbie">
+            <div class="avatar">N</div>
+            <div class="bubble-content">
+              <div class="speaker">Newbie</div>
+              <p>Oh, so it's like a waiter going back and forth between the customer and the kitchen?</p>
+            </div>
+          </div>
+          <div class="chat-bubble bubble-senior">
+            <div class="avatar">S</div>
+            <div class="bubble-content">
+              <div class="speaker">Senior</div>
+              <p>Exactly! And the "menu" is the tool registry in <code>tools.ts</code> — each tool has its own rules about who can order it.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Scenario ======= -->
+      <section class="slide-scenario">
+        <h2>Scenario: Tracing a User Action</h2>
+        <div class="scenario-prompt">When you type <code>claude "fix this bug"</code> and hit Enter...</div>
+        <div class="mermaid" style="max-height:420px;overflow:hidden;">
+graph LR
+    A["User input"] -- "parsed by" --> B["main.tsx"]
+    B -- "sends to" --> C["query.ts"]
+    C -- "API call" --> D["Claude API"]
+    D -- "tool_use" --> E["Tool runner"]
+    E -- "result" --> C
+        </div>
+        <div class="callout"><strong>Key insight:</strong> The loop in query.ts keeps going until Claude responds without requesting any tool calls.</div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Concept ======= -->
+      <section class="slide-concept">
+        <h2>Concept Heading</h2>
+        <div class="content">
+          <p>Explanation with real examples from the codebase. Use bullet points, <strong>bold terms</strong>, and short paragraphs.</p>
+          <div class="callout"><strong>Design principle:</strong> Mention the key takeaway or pattern name here.</div>
+        </div>
+        <aside class="notes">Additional context</aside>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Code Walkthrough (side-by-side) ======= -->
+      <section class="slide-code">
+        <h2>Code Walkthrough Title</h2>
+        <div class="file-path">src/example/file.ts</div>
+        <div class="code-layout">
+          <div class="code-col">
+            <pre><code class="language-typescript">// Real code from the codebase
+function example(): void {
+  const result = processData(input);
+  return result;
+}</code></pre>
+          </div>
+          <div class="text-col">
+            <p>Annotation explaining key lines and patterns in this code.</p>
+            <p>Design decisions and interview-relevant insights.</p>
+            <div class="callout"><strong>Pattern:</strong> Name the pattern here.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Architecture Diagram ======= -->
+      <section class="slide-diagram">
+        <h2>Architecture Overview</h2>
+        <div class="mermaid" style="max-height:450px;overflow:hidden;">
+graph LR
+    A["Module A"] --> B["Module B"]
+    B --> C["Module C"]
+    A --> C
+        </div>
+        <div class="caption">How modules relate to each other</div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Quiz — Multiple Choice ======= -->
+      <section class="slide-concept">
+        <h2>Quick Check</h2>
+        <p style="font-size:0.8em; color:var(--lc-text-secondary);">What does <code>processData()</code> return when given an empty input?</p>
+        <div class="quiz-choices" data-quiz-id="q1">
+          <button onclick="checkAnswer(this, false)">A) It throws an error</button>
+          <button onclick="checkAnswer(this, true)">B) An empty array</button>
+          <button onclick="checkAnswer(this, false)">C) null</button>
+          <button onclick="checkAnswer(this, false)">D) undefined</button>
+        </div>
+        <div class="quiz-explanation hidden" id="q1-explanation">
+          <strong>Correct!</strong> The function returns an empty array because of the guard clause on line 12.
+        </div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Quiz — Short Answer ======= -->
+      <section class="slide-concept">
+        <h2>Think About It</h2>
+        <p style="font-size:0.8em; color:var(--lc-text-secondary);">Why does this module use lazy loading instead of static imports?</p>
+        <div class="short-answer" data-quiz-id="q2">
+          <textarea placeholder="Type your answer..."></textarea>
+          <button onclick="submitShortAnswer(this)">Submit</button>
+          <button class="btn-ref-answer" onclick="showRefAnswer(this)" style="margin-left:0.4em; background:var(--lc-glass-bg); color:var(--lc-accent); border:1.5px solid var(--lc-accent);">Show Reference Answer</button>
+        </div>
+        <div class="ref-answer hidden" id="q2-ref">
+          <strong>Reference answer:</strong> Lazy loading breaks circular dependency chains between modules, which is critical because tool.ts and query.ts would otherwise import each other at module parse time.
+        </div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Summary ======= -->
+      <section class="slide-summary">
+        <h2>Chapter Summary</h2>
+        <ul>
+          <li><strong>Key takeaway 1:</strong> Description</li>
+          <li><strong>Key takeaway 2:</strong> Description</li>
+          <li><strong>Key takeaway 3:</strong> Description</li>
+        </ul>
+        <div class="next-preview">
+          <strong>Next up:</strong> Chapter {{NEXT_NUM}} — {{NEXT_TITLE}}
+        </div>
+      </section>
+
+      <!-- ======= SLIDE TYPE: Feedback ======= -->
+      <section class="slide-feedback">
+        <h2>How was this chapter?</h2>
+        <div class="star-rating" id="starRating">
+          <span class="star" onclick="setRating(1)">&#9733;</span>
+          <span class="star" onclick="setRating(2)">&#9733;</span>
+          <span class="star" onclick="setRating(3)">&#9733;</span>
+          <span class="star" onclick="setRating(4)">&#9733;</span>
+          <span class="star" onclick="setRating(5)">&#9733;</span>
+        </div>
+        <p style="font-size:0.65em; color:var(--lc-muted); margin-top:0.5em;">Optional feedback:</p>
+        <textarea id="feedbackText" placeholder="What worked? What didn't? Want more code? Less theory?"></textarea>
+        <br>
+        <button class="submit-btn" onclick="submitFeedback()">Submit &amp; Finish</button>
+        <p id="submitStatus" class="hidden" style="font-size:0.65em; color:var(--lc-success); margin-top:0.5em;">Submitted! You can close this tab or go back to Claude Code.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    // -- State --
+    window._startTime = Date.now();
+    const quizResults = {};
+    let feedbackRating = 0;
+    const CHAPTER_NUM = {{CHAPTER_NUM_INT}};
+    const SERVER_BASE = window.location.origin;
+
+    // -- Theme setup --
+    const isDark = document.body.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.getElementById('hljs-theme').href =
+        'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css';
+      document.getElementById('theme').href =
+        'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css';
+    }
+
+    // -- Init Reveal --
+    Reveal.initialize({
+      hash: true,
+      plugins: [RevealHighlight],
+      width: 1200,
+      height: 700,
+      margin: 0.08,
+      transition: 'slide',
+      transitionSpeed: 'fast'
+    });
+
+    // -- Progress bar --
+    function updateProgress() {
+      const total = Reveal.getTotalSlides();
+      const current = Reveal.getSlidePastCount() + 1;
+      const pct = Math.round((current / total) * 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+    }
+    Reveal.on('slidechanged', updateProgress);
+    Reveal.on('ready', updateProgress);
+
+    // -- Mermaid --
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDark ? 'dark' : 'default',
+      flowchart: { useMaxWidth: true, htmlLabels: true }
+    });
+
+    // -- Quiz: Multiple Choice --
+    function checkAnswer(btn, isCorrect) {
+      const container = btn.parentElement;
+      const quizId = container.getAttribute('data-quiz-id');
+      container.querySelectorAll('button').forEach(b => {
+        b.disabled = true;
+        b.style.cursor = 'default';
+      });
+      btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+      if (!isCorrect) {
+        container.querySelectorAll('button').forEach(b => {
+          if (b.getAttribute('onclick')?.includes('true')) b.classList.add('correct');
+        });
+      }
+      const expl = document.getElementById(quizId + '-explanation');
+      if (expl) expl.classList.remove('hidden');
+      quizResults[quizId] = { type: 'mc', correct: isCorrect, answer: btn.textContent.trim() };
+    }
+
+    // -- Quiz: Short Answer --
+    function submitShortAnswer(btn) {
+      const container = btn.parentElement;
+      const quizId = container.getAttribute('data-quiz-id');
+      const textarea = container.querySelector('textarea');
+      const answer = textarea.value.trim();
+      if (!answer) return;
+      btn.disabled = true;
+      btn.textContent = 'Submitted';
+      btn.style.background = 'var(--lc-success)';
+      textarea.disabled = true;
+      quizResults[quizId] = { type: 'short', answer: answer };
+    }
+
+    // -- Quiz: Show Reference Answer --
+    function showRefAnswer(btn) {
+      const container = btn.parentElement;
+      const quizId = container.getAttribute('data-quiz-id');
+      const ref = document.getElementById(quizId + '-ref');
+      if (ref) ref.classList.remove('hidden');
+      btn.disabled = true;
+      btn.style.opacity = '0.5';
+    }
+
+    // -- Star Rating --
+    function setRating(value) {
+      feedbackRating = value;
+      document.querySelectorAll('#starRating .star').forEach((s, i) => {
+        s.classList.toggle('active', i < value);
+      });
+    }
+
+    // -- Submit Feedback --
+    function submitFeedback() {
+      const feedbackText = document.getElementById('feedbackText').value.trim();
+      const timeSpent = Math.round((Date.now() - window._startTime) / 1000);
+      const payload = {
+        chapter: CHAPTER_NUM,
+        rating: feedbackRating,
+        feedback: feedbackText,
+        quizResults: quizResults,
+        timeSpentSeconds: timeSpent,
+        timestamp: new Date().toISOString()
+      };
+      fetch(SERVER_BASE + '/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        document.getElementById('submitStatus').classList.remove('hidden');
+        document.querySelector('.submit-btn').disabled = true;
+        document.querySelector('.submit-btn').style.opacity = '0.5';
+      }).catch(err => {
+        console.error('Failed to submit:', err);
+        document.getElementById('submitStatus').textContent = 'Failed to submit. Check console.';
+        document.getElementById('submitStatus').classList.remove('hidden');
+      });
+    }
+  </script>
+</body>
+</html>
