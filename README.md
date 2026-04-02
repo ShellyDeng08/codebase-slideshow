@@ -1,6 +1,6 @@
-# learn-codebase
+# codebase-slideshow
 
-A Claude Code skill that teaches you any codebase through interactive, personalized reveal.js presentations.
+A Claude Code skill that generates beautiful HTML slideshow courses for any codebase — glassmorphism reveal.js presentations with dialogue narrative, interactive quizzes, and adaptive teaching.
 
 ## What it does
 
@@ -25,14 +25,14 @@ Copy this skill into your project's `.claude/skills/` directory:
 ```bash
 # From your project root
 mkdir -p .claude/skills
-cp -r /path/to/learn-codebase-skill .claude/skills/learn-codebase
+cp -r /path/to/codebase-slideshow .claude/skills/codebase-slideshow
 ```
 
 Or clone directly:
 
 ```bash
 cd your-project/.claude/skills
-git clone https://github.com/YOUR_USER/learn-codebase-skill.git learn-codebase
+git clone https://github.com/YOUR_USER/codebase-slideshow.git codebase-slideshow
 ```
 
 ## Prerequisites
@@ -49,7 +49,7 @@ For high-quality architecture diagrams (rendered as PNG), you need:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Set up the Excalidraw renderer
-cd .claude/skills/learn-codebase/excalidraw
+cd .claude/skills/codebase-slideshow/excalidraw
 uv sync
 uv run playwright install chromium
 ```
@@ -67,7 +67,7 @@ Teach me this codebase
 or invoke the skill explicitly:
 
 ```
-/learn-codebase
+/codebase-slideshow
 ```
 
 The skill will ask you about:
